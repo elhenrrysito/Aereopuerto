@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/web/administrador/pasajero/ModificarPasajero.jsp</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/src/java/dao/VentaDAO.java</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/web/administrador/boleto/eliminarBoleto.jsp</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/web/administrador/boleto/modificarBoleto.jsp</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/src/java/controlador/ControladorBoleto.java</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/web/administrador/usuario/ModificarUsuario.jsp</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/web/administrador/pasajero/EliminarPasajero.jsp</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/web/administrador/boleto/listarBoleto.jsp</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/src/java/modelo/Boleto.java</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/src/java/dao/BoletoDAO.java</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/src/java/dao/Conexion.java</file>
+            <file>file:/C:/Users/henrr/OneDrive/DOCUMENTOS/INACAP/Aereopuerto/web/administrador/boleto/insertarBoleto.jsp</file>
+        </group>
+    </open-files>
+</project-private>
