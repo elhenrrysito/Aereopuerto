@@ -16,7 +16,7 @@
     </head>
     <body>
         <%
-            Long idBoleto = Long.parseLong(request.getParameter("id_boleto"));
+            int idBoleto = Integer.parseInt(request.getParameter("id_boleto"));
             BoletoDAO boletoDAO = new BoletoDAO();
             Boleto boleto = boletoDAO.buscar(idBoleto);
 
@@ -31,7 +31,7 @@
                     <form class="row g-3" action="../../ControladorBoleto" method="POST">
                         <div class="col-md-6">
                             <label for="id_boleto" class="form-label">ID</label>
-                            <input type="text" class="form-control" name="id_boleto" value="<%=boleto.getId()%>">
+                            <input type="text" class="form-control" name="boleto_id" value="<%=boleto.getId()%>">
                         </div>
                         <div class="col-md-6">
                             <label for="numero_vuelo" class="form-label">Numero Vuelo</label>

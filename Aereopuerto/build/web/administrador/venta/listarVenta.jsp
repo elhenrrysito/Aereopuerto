@@ -37,7 +37,8 @@
                 <tbody>
                     <%
                         int contador = 1;
-                        for (Venta obj : VentaDAO.obtenerDatos()) {
+                        VentaDAO ventaDAO = new VentaDAO();
+                        for (Venta obj : ventaDAO.listarVentas()) {
                             out.println("<tr>");
                             out.println("<th scope='row'>" + contador);
                             out.println("<td>" + obj.getCodigo());
@@ -51,7 +52,7 @@
                             out.println("<td>" + obj.getBoleto().getHoraVuelo());
                             out.println("<td>" + obj.getTotal());
                             out.println("<td><a href=../administrador/venta/eliminarVenta.jsp?codigo_venta=" + obj.getCodigo() + " id='eliminar_pasajero'>Eliminar</a></td>");
-                            out.println("<td><a href=../administrador/venta/modificarVenta.jsp?codigo_venta=" + obj.getCodigo() + " id='modificar_pasajero'>Modificar</a></td>");
+                            out.println("<td><a href=../administrador/venta/modificarVenta.jsp?codigo_venta=" + obj.getCodigo() + "&boleto_id=" + obj.getBoleto().getId() + " id='modificar_pasajero'>Modificar</a></td>");
                             out.println("<tr>");
                             contador++;
                         }

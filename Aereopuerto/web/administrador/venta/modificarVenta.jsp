@@ -17,8 +17,9 @@
     <body>
         <%
             String codigo = request.getParameter("codigo_venta");
-
-            Venta venta = VentaDAO.buscar(codigo);
+            VentaDAO ventaDAO = new VentaDAO();
+            int idBoleto = Integer.parseInt(request.getParameter("boleto_id"));
+            Venta venta = ventaDAO.buscar(codigo);
 
         %>
         <!-- AGREGAR VENTA -->
@@ -34,6 +35,7 @@
                         <div class="col-md-6">
                             <label for="codigo_venta" class="form-label">Codigo Venta</label>
                             <input type="text" class="form-control" name="codigo_venta" value="<%=venta.getCodigo()%>">
+                            <input type="hidden" name="boleto_id" value="<%=idBoleto%>"/>
                         </div>
                         <div class="col-md-6">
                             <label for="pasaporte_pasajero" class="form-label">Pasaporte Pasajero</label>

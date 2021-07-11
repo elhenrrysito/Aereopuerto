@@ -17,8 +17,9 @@
     <body>
         <%
             String codigo = request.getParameter("codigo_venta");
+            VentaDAO ventaDAO = new VentaDAO();
 
-            Venta venta = VentaDAO.buscar(codigo);
+            Venta venta = ventaDAO.buscar(codigo);
 
         %>
         <!-- AGREGAR VENTA -->

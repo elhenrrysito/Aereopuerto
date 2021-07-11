@@ -10,6 +10,9 @@ import dao.PasajeroDAO;
 import dao.VentaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,11 +37,64 @@ public class ControladorVenta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
 
         String codigo = "", fecha = "", opcion = "", pasaporte = "", nacionalidad = "", numeroVuelo = "";
         int cantidad = 0, total = 0;
-/*
+        PasajeroDAO pasajeroDAO = new PasajeroDAO();
+        VentaDAO ventaDAO = new VentaDAO();
+        BoletoDAO boletoDAO = new BoletoDAO();
+        codigo = request.getParameter("codigo_venta");
+        total = Integer.parseInt(request.getParameter("total"));
+        pasaporte = request.getParameter("pasaporte_pasajero");
+        nacionalidad = request.getParameter("nacionalidad_pasajero");
+        numeroVuelo = request.getParameter("numero_vuelo");
+        opcion = request.getParameter("opcion");
+        
+        if(opcion.equals("Grabar")) {
+            if(codigo.isEmpty() || total == 0 || pasaporte.isEmpty() 
+                    || numeroVuelo.isEmpty()) {
+                response.sendRedirect("MensajeError.jsp?texto=Error! los campos"
+                        + " no deben estar vacios.&retorno=administrador/form_admin.jsp");
+            } else {
+                int id = Integer.parseInt(request.getParameter("boleto_id"));
+              
+                Pasajero pasajero = pasajeroDAO.buscar(pasaporte);
+                Boleto boleto = boletoDAO.buscar(id);
+                Venta venta = new Venta(codigo, fecha, total, pasajero, boleto);
+            }
+        }
+        
+        if(opcion.equals("Actualizar")) {
+          
+            if(total == 0 || pasaporte.isEmpty() || nacionalidad.isEmpty() 
+                    || numeroVuelo.isEmpty()) {
+                response.sendRedirect("MensajeError.jsp?texto=Error! los campos"
+                        + " no deben estar vacios.&retorno=administrador/form_admin.jsp");
+            } else {
+                int id = Integer.parseInt(request.getParameter("boleto_id"));
+                
+                Pasajero pasajero = pasajeroDAO.buscar(pasaporte);
+                Boleto boleto = boletoDAO.buscar(id);
+                Venta venta = new Venta(codigo, fecha, total, pasajero, boleto);
+                if(ventaDAO.modificar(venta)) {
+                    response.sendRedirect("MensajeOk.jsp?texto=Bien! datos actualizados...&retorno=administrador/form_admin.jsp");
+                } else {
+                    response.sendRedirect("MensajeError.jsp?texto=Error! datos NO actualizados...&retorno=administrador/form_admin.jsp");
+                }
+                
+            }
+        }
+        
+        if(opcion.equals("Eliminar")) {
+            if(ventaDAO.eliminar(codigo)) {
+                response.sendRedirect("MensajeOk.jsp?texto=Datos eliminados exitosamente&retorno=administrador/form_admin.jsp");
+            } else {
+                response.sendRedirect("MensajeError.jsp?texto=Error, datos no eliminados&retorno=administrador/form_admin.jsp");
+            }
+        }
+
+        /*
         opcion = request.getParameter("opcion");
         fecha = request.getParameter("fecha_venta");
         if (!opcion.equals("buscar_fecha")) {
@@ -91,8 +147,7 @@ public class ControladorVenta extends HttpServlet {
                 response.sendRedirect("MensajeError.jsp?texto=No hay ventas para esta fecha&retorno=administrador/form_admin.jsp");
             }
         }
-*/
-
+         */
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -120,7 +175,11 @@ public class ControladorVenta extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -134,7 +193,11 @@ public class ControladorVenta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

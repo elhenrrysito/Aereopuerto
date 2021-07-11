@@ -79,7 +79,7 @@ public class ControladorBoleto extends HttpServlet {
         }
         
         if(opcion.equals("Eliminar")) {
-            id = Integer.parseInt(request.getParameter("id_boleto"));
+            id = Integer.parseInt(request.getParameter("boleto_id"));
             // modificar para buscar por codigo
             if(boletoDAO.eliminar(id)) {
                 response.sendRedirect("MensajeOk.jsp?texto=Datos eliminados exitosamente&retorno=administrador/form_admin.jsp");

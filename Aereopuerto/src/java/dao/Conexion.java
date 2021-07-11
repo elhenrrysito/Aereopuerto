@@ -19,8 +19,8 @@ public class Conexion {
      public Connection con;
     public Statement state;
     private String jbdc = "jdbc:mysql://localhost:3306/aereopuerto?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
-    private String username = "root";
-    private String password = "root";
+    private String username = "admin";
+    private String password = "Zxcvbnm,";
     
 //creamos metodo para conectarnos a la BBDD
     public void conectar() {

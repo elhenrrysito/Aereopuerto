@@ -18,9 +18,10 @@
     </head>
     <body>
         <%
-            String numeroVuelo = request.getParameter("numero_vuelo");
+            int id = Integer.parseInt(request.getParameter("boleto_id"));
+            BoletoDAO boletoDAO = new BoletoDAO();
 
-            Boleto boleto = BoletoDAO.buscar(numeroVuelo);
+            Boleto boleto = boletoDAO.buscar(id);
 
         %>
         <!-- AGREGAR VENTA -->
@@ -35,6 +36,7 @@
                         <div class="col-md-6">
                             <label for="codigo_venta" class="form-label">Codigo Venta</label>
                             <input type="text" class="form-control" name="codigo_venta">
+                            <input type="text" name="boleto_id" value="<%=id%>"/>
                         </div>
                         <div class="col-md-6">
                             <label for="codigo_venta" class="form-label">Fecha Venta</label>
@@ -45,7 +47,8 @@
                             <select class="form-select" name="pasaporte_pasajero" aria-label="Default select example">
                                 <option selected>Open this select menu</option>
                                 <%                                
-                                    for (Pasajero obj : PasajeroDAO.obtenerDatos()) {
+                                    PasajeroDAO pasajeroDAO = new PasajeroDAO();
+                                    for (Pasajero obj : pasajeroDAO.listarPasajero()) {
                                         out.println("<option value='" + obj.getPasaporte() + "'>" + obj.getPasaporte() + "</option>");
                                     }
                                 %> 

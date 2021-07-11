@@ -7,7 +7,10 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import modelo.Boleto;
 
 /**
@@ -33,7 +36,7 @@ public class BoletoDAO extends Conexion {
             id++;
             int filas = super.state.executeUpdate("INSERT INTO boletos VALUES ("+id+", '" + boleto.getNumeroVuelo()
                     + "', '" + boleto.getAereolinea() + "', '" + boleto.getFechaVuelo() 
-                    + "', '" + boleto.getHoraVuelo() + "', '" + boleto.getDestino() + "');");
+                    + "', '" + boleto.getHoraVuelo() + "', '" + boleto.getDestino() + "', " + boleto.getPrecio() + ");");
             con.close();
             if(filas>0) {
                 estado = true;
@@ -49,13 +52,19 @@ public class BoletoDAO extends Conexion {
         Boleto boleto = new Boleto();
         
         ResultSet result = state.executeQuery("SELECT * FROM boletos where id='" + id + "';");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         while(result.next()) {
            boleto.setId((int) result.getObject(1));
-           boleto.setNumeroVuelo((String) result.getObject(2));
-           boleto.setAereolinea((String) result.getObject(3));
-           boleto.setFechaVuelo((String) result.getObject(4));
-           boleto.setHoraVuelo((String) result.getObject(5));
-           boleto.setDestino((String) result.getObject(6));
+            boleto.setNumeroVuelo((String) result.getObject(2));
+            boleto.setAereolinea((String) result.getObject(3));
+            
+            String strDate = dateFormat.format((Date) result.getObject(4));
+            boleto.setFechaVuelo(strDate);
+            String strTime = timeFormat.format((Date) result.getObject(5));
+            boleto.setHoraVuelo(strTime);
+            boleto.setDestino((String) result.getObject(6));
+            boleto.setPrecio((int) result.getObject(7));
         }
         return boleto;
     }
@@ -64,6 +73,8 @@ public class BoletoDAO extends Conexion {
         super.conectar();
         ResultSet result = state.executeQuery("SELECT * FROM boletos");
         ArrayList<Boleto> boletos = new ArrayList<Boleto>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         
         while(result.next()) {
             Boleto boleto = new Boleto();
@@ -71,10 +82,12 @@ public class BoletoDAO extends Conexion {
             boleto.setNumeroVuelo((String) result.getObject(2));
             boleto.setAereolinea((String) result.getObject(3));
             
-            
-            boleto.setFechaVuelo((String) result.getObject(4));
-            boleto.setHoraVuelo((String) result.getObject(5));
+            String strDate = dateFormat.format((Date) result.getObject(4));
+            boleto.setFechaVuelo(strDate);
+            String strTime = timeFormat.format((Date) result.getObject(5));
+            boleto.setHoraVuelo(strTime);
             boleto.setDestino((String) result.getObject(6));
+            boleto.setPrecio((int) result.getObject(7));
             
             boletos.add(boleto);
         }
@@ -87,7 +100,8 @@ public class BoletoDAO extends Conexion {
             super.conectar();
             int filas = super.state.executeUpdate("UPDATE boletos set numero_vuelo='" + boleto.getNumeroVuelo() 
                     + "', aereolinea= '" + boleto.getAereolinea() + "', fecha_vuelo='" + boleto.getFechaVuelo() 
-                    + "', hora_vuelo='" + boleto.getHoraVuelo() + "', destino='" + boleto.getDestino() + "' where id=" + boleto.getId() + ";");
+                    + "', hora_vuelo='" + boleto.getHoraVuelo() + "', destino='" + boleto.getDestino() 
+                    + "', precio=" + boleto.getPrecio() + " where id=" + boleto.getId() + ";");
             if(filas > 0) {
                 estado = true;
             }

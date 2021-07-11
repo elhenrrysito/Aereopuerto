@@ -34,7 +34,8 @@
                 <tbody>
                     <%
                         int contador = 1;
-                        for (Boleto obj : BoletoDAO.obtenerDatos()) {
+                        BoletoDAO boletoDAO = new BoletoDAO();
+                        for (Boleto obj : boletoDAO.listarBoletos()) {
                             out.println("<tr>");
                             out.println("<th scope='row'>" + contador);
                             out.println("<td>" + obj.getNumeroVuelo());
@@ -42,7 +43,7 @@
                             out.println("<td>" + obj.getFechaVuelo());
                             out.println("<td>" + obj.getHoraVuelo());
                             out.println("<td>" + obj.getDestino());
-                            out.println("<td><a href=../administrador/venta/insertarVenta.jsp?numero_vuelo=" + obj.getNumeroVuelo() + " id='eliminar_pasajero'>Agregar venta</a></td>");
+                            out.println("<td><a href=../administrador/venta/insertarVenta.jsp?boleto_id=" + obj.getId()+ " id='eliminar_pasajero'>Agregar venta</a></td>");
                             out.println("<tr>");
                             contador++;
                         }
